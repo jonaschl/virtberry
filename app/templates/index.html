@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="row">
+    <nav class="col-md-12" >
+      <ul class="nav nav-tabs">
+        <li><a href="/host">Host</a></li>
+        <li class="active"><a href="/vm">Vms</a></li>
+        <li><a href="/storage">Storage</a></li>
+      </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+    {% for domain in domains %}
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+      <p>
+      <h3>Name: {{ domain.name }}</h3><br>
+      uuid: {{ domain.uuid}} <br>
+      Status: {{ domain.state }} <br>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

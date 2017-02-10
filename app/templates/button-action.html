@@ -1,0 +1,13 @@
+{% extends "vm.html" %}
+
+{% block destroy %}
+<a href="/vm/{{domain.uuid}}/actions/destroy" class="btn btn-default btn-block"
+data-toggle="confirmation"
+data-btn-ok-label="Continue" data-btn-ok-icon="glyphicon glyphicon-share-alt"
+data-btn-ok-class="btn-success"
+data-btn-cancel-label="Cancel" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
+data-btn-cancel-class="btn-danger"
+data-title="Are you sure?" data-content="Are you sure that you want to destroy the VM '{{ domain.name}}'?"
+data-singleton="true"
+role="button">Destroy</a>
+{% endblock %}

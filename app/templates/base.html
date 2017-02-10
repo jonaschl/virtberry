@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Basic Template</title>
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+    <div class="row">
+      <header class="col-md-12">
+        <h1>Webvirt by Jonatan Schlag</h1>
+      </header>
+    </div>
+	{% set navigation_bar = [
+    		('/vm', 'vm', 'Vms'),
+    		('/host', 'host', 'Host'),
+    		('/storage', 'Storage', 'Storage')
+	] -%}
+    <div class="row" style="margin-bottom: 1%;">
+    <nav class="col-md-12" >
+      <ul class="nav nav-tabs">
+	{% for href, id, caption in navigation_bar %}
+  	<li{% if id == active_page %} class="active"{% endif%}><a href="{{ href }}">{{ caption }}</a></li>
+	{% endfor %}
+      </ul>
+      </nav>
+    </div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    {% for category, message in messages %}
+	<div class="alert {{ category }} alert-dismissable">
+	{#Cross for Close#}
+          <a href="#" class="close" data-dismiss="alert" aria-label="Close">&times</a>
+		{{ message}}
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+    {% block content %}{% endblock %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed .min-->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/Confirmation/bootstrap-confirmation.min.js"></script>
+    </div>
+
+      <script>
+      $('[data-toggle=confirmation]').confirmation({
+        rootSelector: '[data-toggle=confirmation]',
+        // other options
+      });
+      </script>
+  </body>
+</html>

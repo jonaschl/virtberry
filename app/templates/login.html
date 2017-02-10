@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+
+<link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+<style>
+.vertical-center {
+  min-height: 100vh;
+  display: flex;
+  align-items : center;
+}
+
+</style>
+</head>
+
+<body class="">
+
+
+
+<div class="vertical-center">
+<div class="container" style="">
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 center-block" style="float:none;">
+    <h1 class="display-4">Virtberry</h1>
+  </div>
+  <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 center-block" style="float:none;">
+  <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label for="user">Username:</label>
+        {{ form.user(class_="form-control") }}
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        {{ form.password(class_="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Submit</button>
+  </form>
+</div>
+</div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins)
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed .min-->
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/Confirmation/bootstrap-confirmation.min.js"></script>
+</div>
+
+  <script>
+  $('[data-toggle=confirmation]').confirmation({
+    rootSelector: '[data-toggle=confirmation]',
+    // other options
+  });
+  </script>
+</body>
+</html>
