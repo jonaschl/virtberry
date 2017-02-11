@@ -13,6 +13,7 @@ from flask_login import LoginManager, login_required, login_user, current_user
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        # We need a check if the user actually exist
         user = User(form.user.data)
         user.check_pass(form.password.data)
         user.printdata()

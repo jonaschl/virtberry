@@ -11,11 +11,12 @@ from app import views
 from app import actions
 from app import test
 from app import logout
+from app.user import check_if_user_exist
 
 @login_manager.user_loader
 def load_user(user_id):
     print (user_id)
-    if user_id == "hello":
+    if check_if_user_exist(user_id) == True:
         user = User(user_id)
         return user
     else:
