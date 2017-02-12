@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import json
+from hashlib import pbkdf2_hmac
+import binascii
 
 class User:
     def __init__(self, userid):
@@ -10,8 +12,7 @@ class User:
         self.is_authenticated_var = False
 
     def check_pass(self, password):
-            if password == self.password:
-                self.is_authenticated_var = True
+        self.is_authenticated_var = check_password(self.password, password)
 
     def get_user_name(self):
         return self.username
@@ -64,3 +65,20 @@ def get_user_attributes(userid ,attr):
         for user in data["users"]:
             if user["username"] == userid:
                 return user.get(attr)
+
+def get_user_pass_salt():
+    with open("/etc/virtberry/user.json","r") as file:
+        data = json.load(file)
+        return data["salt"]
+
+
+def hash_password(password):
+    passhash = pbkdf2_hmac("sha256", bytes(password, encoding="UTF-8"), bytes(get_user_pass_salt(), encoding="UTF-8"), 200000)
+    passhash = binascii.hexlify(passhash)
+    return passhash.decode()
+
+def check_password(hash, password):
+    if hash_password(password) == hash:
+        return True
+    else:
+        return False
