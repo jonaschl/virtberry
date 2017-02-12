@@ -3,6 +3,7 @@ import json
 from hashlib import pbkdf2_hmac
 import binascii
 
+
 class User:
     def __init__(self, userid):
         self.username = userid
@@ -65,6 +66,8 @@ def get_user_attributes(userid ,attr):
         for user in data["users"]:
             if user["username"] == userid:
                 return user.get(attr)
+
+
 
 def get_user_pass_salt():
     with open("/etc/virtberry/user.json","r") as file:
