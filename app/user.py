@@ -48,7 +48,7 @@ class User:
             return self.is_anonymous_var
 
 def check_if_user_exist(userid):
-    with open("/etc/virtberry/user.json") as file:
+    with open("/etc/virtberry/config.json") as file:
         data = json.load(file)
         users = data["users"]
         for user in users:
@@ -58,7 +58,7 @@ def check_if_user_exist(userid):
         return False
 
 def set_user_attributes(userid ,attr, value):
-    with open("/etc/virtberry/user.json","r") as file:
+    with open("/etc/virtberry/config.json","r") as file:
         data = json.load(file)
         for user in data["users"]:
             if user["username"] == userid:
@@ -66,11 +66,11 @@ def set_user_attributes(userid ,attr, value):
                 new.setdefault(attr, value)
                 print(new)
                 user.update(new)
-                with open("/etc/virtberry/user.json","w") as file:
+                with open("/etc/virtberry/config.json","w") as file:
                     json.dump(data, file, indent=4)
 
 def get_user_attributes(userid ,attr):
-    with open("/etc/virtberry/user.json","r") as file:
+    with open("/etc/virtberry/config.json","r") as file:
         data = json.load(file)
         for user in data["users"]:
             if user["username"] == userid:
@@ -79,7 +79,7 @@ def get_user_attributes(userid ,attr):
 
 
 def get_user_pass_salt():
-    with open("/etc/virtberry/user.json","r") as file:
+    with open("/etc/virtberry/config.json","r") as file:
         data = json.load(file)
         return data["salt"]
 
