@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% set active_page = "preferences" %}
+{% block content %}
+<div class="container" style="">
+{% with messages = get_flashed_messages(with_categories=true) %}
+	{% if messages %}
+	<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none;">
+	{% for category, message in messages %}
+			<div class="alert {{ category }} alert-dismissable">
+			{#Cross for Close#}
+			<a href="#" class="close" data-dismiss="alert" aria-label="Close">&times</a>
+			{{ message}}
+			</div>
+    {% endfor %}
+	</div>
+	</div>
+	{% endif %}
+{% endwith %}
+
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center-block" style="float:none;">
+  <form action="" method="post" name="changepassword">
+      {{ form.hidden_tag() }}
+      <div class="form-group">
+        <label for="passwordold">Old Password:</label>
+        {{ form.passwordold(class_="form-control") }}
+      </div>
+      <div class="form-group">
+        <label for="passwordnew1">New Password:</label>
+        {{ form.passwordnew1(class_="form-control") }}
+      </div>
+	  <div class="form-group">
+		<label for="passwordnew2">Repeat new Password:</label>
+		{{ form.passwordnew2(class_="form-control") }}
+	  </div>
+      <button type="submit" class="btn btn-default btn-block">Submit</button>
+  </form>
+</div>
+</div>
+</div>
+{% endblock %}

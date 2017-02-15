@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import json
 from hashlib import pbkdf2_hmac
 import binascii
@@ -14,6 +14,11 @@ class User:
 
     def check_pass(self, password):
         self.is_authenticated_var = check_password(self.password, password)
+        print("get here")
+
+    def check_pass_return(self, password):
+        return check_password(self.password, password)
+        print("get here")
 
     def get_user_name(self):
         return self.username
@@ -23,6 +28,10 @@ class User:
         print("self.password {}".format(self.password))
         print("self.is_authenticated {}".format(self.is_authenticated_var))
         print("self.is_active {}".format(self.is_active_var))
+
+    def set_password(self, value):
+            hashedpass = hash_password(value)
+            set_user_attributes(self.username ,"pass", hashedpass)
 
     def get_id(self):
         return "{}".format(self.username)

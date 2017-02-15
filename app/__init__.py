@@ -11,6 +11,7 @@ from app import views
 from app import actions
 from app import test
 from app import logout
+from app import preferences
 from app.user import check_if_user_exist
 
 @login_manager.user_loader
