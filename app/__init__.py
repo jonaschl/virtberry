@@ -12,6 +12,7 @@ from app import actions
 from app import test
 from app import logout
 from app import preferences
+from app import errors
 
 @login_manager.user_loader
 def load_user(user_id):
