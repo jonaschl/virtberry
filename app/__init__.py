@@ -9,7 +9,7 @@ login_manager.login_view = "login"
 login_manager.login_message_category = "alert-danger"
 from app import views
 from app import actions
-from app import test
+from app import login
 from app import logout
 from app import preferences
 from app import errors
