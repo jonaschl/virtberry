@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
-from .user import User
+from virtberryusers import User, check_if_user_exist
 app = Flask(__name__)
 app.config.from_object('config')
 login_manager = LoginManager()
@@ -12,7 +12,6 @@ from app import actions
 from app import test
 from app import logout
 from app import preferences
-from app.user import check_if_user_exist
 
 @login_manager.user_loader
 def load_user(user_id):

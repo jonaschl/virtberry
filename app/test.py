@@ -1,10 +1,9 @@
 from flask import render_template, redirect, url_for, flash
 from app import app
 from .form import LoginForm
-from .user import User
 import flask_login
 from flask_login import LoginManager, login_required, login_user, current_user
-
+from virtberryusers import User
 
 
 # index view function suppressed for brevity
