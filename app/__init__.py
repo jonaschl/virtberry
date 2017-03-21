@@ -3,6 +3,17 @@ from flask_login import LoginManager
 from virtberryusers import User, check_if_user_exist
 app = Flask(__name__)
 app.config.from_object('config')
+import virtberry_module_management
+from virtberry_module_management import *
+
+for module in get_enabled_modules():
+    # import the real module (the code)
+    the_real_module = import_module_from_name(module)
+    # create a objet from the virtberry_module class
+    the_module = virtberry_module(module)
+    for blueprint in the_module.get_attributes('blueprints'):
+        app.register_blueprint(get_object_from_name(the_real_module, blueprint))
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
