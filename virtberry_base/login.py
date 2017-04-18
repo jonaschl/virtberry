@@ -1,14 +1,10 @@
-from flask import render_template, redirect, url_for, flash
-from app import app
-from .form import LoginForm
-import flask_login
+from flask import render_template, redirect, url_for, flash, current_app
+from virtberry_base import virtberry_base
+from virtberry_base.form import LoginForm
 from flask_login import LoginManager, login_required, login_user, current_user
 from virtberryusers import User
 
-
-# index view function suppressed for brevity
-
-@app.route('/login', methods=['GET', 'POST'])
+@virtberry_base.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -19,7 +15,7 @@ def login():
         if user.is_authenticated() == True:
             if login_user(user)  == True:
                 flash("Hello {}".format(current_user.get_user_name()))
-                return redirect(url_for('index'))
+                return redirect(current_app.login_redirect_to)
             else:
                 return render_template('login.html',
                                title='Sign In',

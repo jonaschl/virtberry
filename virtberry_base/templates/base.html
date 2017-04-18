@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Virtberry</title>
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/bootstrap-submenu-master/dist/css/bootstrap-submenu.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Virtberry</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            {% for entry in menu -%}
+                {% if entry.type == "dropdown" -%}
+                <li class="dropdown">
+                <a tabindex="0" data-toggle="dropdown" data-submenu> {{ entry.displayname }}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                <li class="dropdown-submenu">
+                        {% with child1 = entry.child -%}
+                            {% for entry in child1 -%}
+                                {% if entry.type == "dropdown" -%}
+                                <a tabindex="0"> {{ entry.displayname }}</a>
+                                <ul class="dropdown-menu">
+                                <li class="dropdown-submenu">
+                                        {% with child2 = entry.child -%}
+                                            {% for entry in child2 -%}
+                                                <li
+                                                {% if entry.index == active_page %} class="active"{% endif -%}
+                                                >
+                                                <a  tabindex="0" href="{{ entry.absolute_url }}">{{ entry.displayname }}</a></li>
+                                            {% endfor -%}
+                                        {% endwith -%}
+                                    </ul>
+                                    </li>
+                                {% endif -%}
+                            {% endfor -%}
+                        {% endwith -%}
+                    </li>
+                    {% with child1 = entry.child -%}
+                    {% for entry in child1 -%}
+                    {% if entry.type == "normal" -%}
+                    <li {% if entry.index == active_page %} class="active"{% endif%} >
+                    <a href="{{ entry.absolute_url }}">{{ entry.displayname }}</a></li>
+                    {% endif -%}
+                    {% endfor -%}
+                    {% endwith -%}
+                    </ul>
+                </li>
+                {% else %}
+                <li {% if entry.index == active_page %} class="active"{% endif%} >
+                <a href="{{ entry.absolute_url }}">{{ entry.displayname }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+      <a href="/logout" class="btn btn-default navbar-btn navbar-right" >Logout</a>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    {% for category, message in messages %}
+	<div class="alert {{ category }} alert-dismissable">
+	{#Cross for Close#}
+          <a href="#" class="close" data-dismiss="alert" aria-label="Close">&times</a>
+		{{ message}}
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+    {% block content %}{% endblock %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed .min-->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/Confirmation/bootstrap-confirmation.min.js"></script>
+    <script src="/static/bootstrap-submenu-master/dist/js/bootstrap-submenu.js"></script>
+    </div>
+
+      <script>
+      $('[data-toggle=confirmation]').confirmation({
+        rootSelector: '[data-toggle=confirmation]',
+        // other options
+      });
+      </script>
+      <script >
+      $('[data-submenu]').submenupicker();
+      </script>
+  </body>
+</html>
