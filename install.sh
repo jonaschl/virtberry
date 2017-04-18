@@ -2,6 +2,7 @@
 
 echo "Create config dir  /etc/virtberry"
 mkdir -p /etc/virtberry
+mkdir -p /etc/virtberry/modules
 cp config.json /etc/virtberry/config.json
 cp users.json /etc/virtberry/users.json
 
