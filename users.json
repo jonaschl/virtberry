@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "active": true,
+            "pass": "8d42f811c01f2d986768992119777980e616176892c15ab91284a228f4eb7dc4",
+            "anonymous": false,
+            "permissions": [
+                {
+                    "read": "True",
+                    "write": "False",
+                    "role": "users"
+                },
+                {
+                    "read": "False",
+                    "write": "False",
+                    "role": "vm"
+                }
+            ],
+            "username": "admin"
+        }
+    ]
+}

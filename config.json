@@ -1,11 +1,21 @@
 {
-  "users": [
+  "salt": "gesalzen",
+  "path_module_config": "/etc/virtberry/modules",
+  "flask_config": {
+    "WTF_CSRF_ENABLED": true,
+    "SECRET_KEY": "you-will-never-guess"
+  },
+  "login_config": {
+    "redirect_to": "/vm"
+  },
+  "menu": [
     {
-      "username": "admin",
-      "pass" : "5907100861f5ee6dd3262da576759984cfd6931f61ecc29cabc8dbe58f900cea",
-      "active": true,
-      "anonymous": false
+      "displayname": "Preferences",
+      "absolute_url": "/preferences",
+      "type": "dropdown",
+      "index": "preferences",
+      "parent": [
+       ]
     }
-  ],
-	"salt": "super-secret-salt"
+  ]
 }
